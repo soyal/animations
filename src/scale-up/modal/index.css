@@ -1,0 +1,34 @@
+.animated {
+  transition: all .3s ease-in-out;
+}
+
+.scale-in,
+.scale-out.scale-out-active {
+  transform: scale(0);
+}
+
+.scale-in.scale-in-active,
+.scale-out {
+  transform: scale(1);
+}
+
+.modal-wrapper {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+.modal-container {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.modal {
+  position: relative;
+  top: 100px;
+  margin: 0 auto;
+  width: 300px;
+  background: #fff;
+}
