@@ -4,7 +4,7 @@ import Modal from './modal'
 
 class ScaleUp extends React.Component {
   state = {
-    show: true
+    show: false
   }
 
   toggleShow = () => {

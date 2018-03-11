@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import { CSSTransition } from 'react-transition-group'
+import { Transition } from 'react-transition-group'
 import PropTypes from 'prop-types'
 
 import './index.css'
@@ -67,7 +67,7 @@ class Modal extends Component {
   }
 
   componentDidMount() {
-    if(this.isShow()) {
+    if (this.isShow()) {
       this.append()
     }
   }
@@ -78,29 +78,39 @@ class Modal extends Component {
 
   render() {
     const tpl = (
-      <CSSTransition
+      <Transition
         in={this.isShow()}
         timeout={500}
         mountOnEnter={true}
         unmountOnExit={true}
-        classNames={{
-          enter: 'animated scale-in',
-          enterActive: 'scale-in-active',
-          exit: 'animated scale-out',
-          exitActive: 'scale-out-active'
-        }}
         onEnter={this.append}
         onExited={this.remove}
       >
-        <div className="modal-container" onClick={this.props.onClose}>
+        {state => {
+          console.log('render: ', state)
+          return (
+            <div className="modal-container" onClick={this.props.onClose}>
+              <div
+                className="modal"
+                onClick={e => {
+                  e.stopPropagation()
+                }}
+              >
+                <h2 className="modal_title">modal title</h2>
+                <div className="modal_content">{this.props.children}</div>
+              </div>
+            </div>
+          )
+        }}
+        {/* <div className="modal-container" onClick={this.props.onClose}>
           <div className="modal" onClick={e => {
             e.stopPropagation()
           }}>
             <h2 className="modal_title">modal title</h2>
             <div className="modal_content">{this.props.children}</div>
           </div>
-        </div>
-      </CSSTransition>
+        </div> */}
+      </Transition>
     )
 
     return ReactDOM.createPortal(tpl, this.el)
